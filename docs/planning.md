@@ -30,19 +30,18 @@ The intention is to clarify the specifications, how I'll go about achieving them
 3. Create the basic skeleton of the site
 4. Implement buttons for basic functionality, hook up data etc.
 5. Create progress bar, counter
-6. CSS
 
 ## If there's time:
 
 -   Cool animations (nothing too flashy)
-
--
 
 -   Aria labels
 
 -   Dark mode
 
 -   Alarm sound choice
+
+-   Customize pomodoro/break length
 
 -   Ambience (rain/forest sounds/white noise)
 
@@ -55,8 +54,6 @@ The intention is to clarify the specifications, how I'll go about achieving them
 [React TypeScript cheat sheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup)
 
 [Jest docs](https://jestjs.io/docs/getting-started)
-
-[Dark mode with React](https://css-tricks.com/easy-dark-mode-and-multiple-color-themes-in-react/)
 
 ## Code and technology to use:
 
