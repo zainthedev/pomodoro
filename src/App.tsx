@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme, GlobalStyle } from './theme';
+import { useState, useEffect } from 'react';
+import { ButtonToggle } from './styled-components/ButtonToggle';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [theme, setTheme] = useState('light');
+
+    function switchTheme() {
+        const newTheme = theme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', newTheme);
+        setTheme(newTheme);
+    }
+
+    // Set the current theme based on localStorage or the system theme
+    useEffect(() => {
+        // Get the saved theme in local storage
+        const savedTheme = localStorage.getItem('theme');
+
+        // Check if system preference is set to dark
+        const preferDark =
+            window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else if (preferDark) {
+            setTheme('dark');
+        }
+    }, []);
+
+    return (
+        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <GlobalStyle />
+            <ButtonToggle onClick={switchTheme}>SWITCH THEME</ButtonToggle>
+        </ThemeProvider>
+    );
 }
 
 export default App;
