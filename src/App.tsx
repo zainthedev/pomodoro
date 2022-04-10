@@ -2,9 +2,17 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyle } from './theme';
 import { useState, useEffect } from 'react';
 import { ButtonToggle } from './styled-components/ButtonToggle';
+import { TimerComponent } from './components/TimerComponent';
 
 function App() {
     const [theme, setTheme] = useState('light');
+    const [pomodoroCount, setPomodoroCount] = useState(0);
+    const [isPomodoro, setIsPomodoro] = useState(true);
+    const [isShortBreak, setIsShortBreak] = useState(false);
+    const [isLongBreak, setIsLongBreak] = useState(false);
+
+    let shortBreakLength = 1;
+    let longBreakLength = 2;
 
     function switchTheme() {
         const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -29,10 +37,31 @@ function App() {
         }
     }, []);
 
+    const increasePomodoroCount = () => {
+        setPomodoroCount(pomodoroCount + 1);
+    };
+
     return (
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <TimerComponent
+                shortBreakLength={shortBreakLength}
+                longBreakLength={longBreakLength}
+                increasePomodoroCount={increasePomodoroCount}
+                isPomodoro={isPomodoro}
+                setIsPomodoro={setIsPomodoro}
+                isShortBreak={isShortBreak}
+                setIsShortBreak={setIsShortBreak}
+                setIsLongBreak={setIsLongBreak}
+                pomodoroCount={pomodoroCount}
+            />
             <GlobalStyle />
-            <ButtonToggle onClick={switchTheme}>SWITCH THEME</ButtonToggle>
+            <ButtonToggle data-test='switchThemeButton' onClick={switchTheme}>
+                SWITCH THEME
+            </ButtonToggle>
+            <h1>Pomodoro count: {pomodoroCount}</h1>
+            <p>IsPomodoro: {isPomodoro ? 'pomodoro' : false}</p>
+            <p>isShortBreak: {isShortBreak ? 'pomodoro' : false}</p>
+            <p>isLongBreak: {isLongBreak ? 'pomodoro' : false}</p>
         </ThemeProvider>
     );
 }
