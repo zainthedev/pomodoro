@@ -25,11 +25,10 @@ The intention is to clarify the specifications, how I'll go about achieving them
 ## Steps:
 
 0. Get design inspiration, choose a theme and colour palette
-1. Write unit tests
-2. Write factories
-3. Create the basic skeleton of the site
-4. Implement buttons for basic functionality, hook up data etc.
-5. Create progress bar, counter
+1. Write tests
+2. Create the basic skeleton of the site
+3. Implement buttons for basic functionality, hook up data etc.
+4. Create progress bar, counter
 
 ## If there's time:
 
@@ -53,36 +52,10 @@ The intention is to clarify the specifications, how I'll go about achieving them
 
 [React TypeScript cheat sheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup)
 
-[Jest docs](https://jestjs.io/docs/getting-started)
-
 ## Code and technology to use:
 
 ### Tech:
 
 -   React/TypeScript
 
--   Jest for unit tests
-
 -   Styled Components
-
-### Factories:
-
-    time: {
-        remainingTime: string,
-        startTimer(time: string),
-        stopTimer()
-        startTimerTask(),
-        startTimerShortBreak(),
-        startTimerLongBreak(),
-        resetTimer()
-    },
-    alarm: {
-        src: string,
-        playSound(),
-        setSrc(newSrc: string),
-    },
-    ambience: {
-        src: string,
-        playSound(),
-        stopSound()
-    }
