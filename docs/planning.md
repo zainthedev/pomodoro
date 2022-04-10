@@ -50,12 +50,16 @@ The intention is to clarify the specifications, how I'll go about achieving them
 
 [React docs](https://reactjs.org/docs/getting-started.html)
 
-[React TypeScript cheat sheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup)
+[React TypeScript cheat sheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/setup)\
+
+[Cypress docs](https://docs.cypress.io/)
 
 ## Code and technology to use:
 
 ### Tech:
 
 -   React/TypeScript
+
+-   Cypress
 
 -   Styled Components
