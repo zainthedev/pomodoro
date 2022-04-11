@@ -10,23 +10,26 @@ export const GlobalStyle = createGlobalStyle`
 
 export const lightTheme: DefaultTheme = {
     colors: {
-        body: 'white',
-        text: 'black',
+        body: '#FFF',
+        text: '#1F2933',
+        red: '#FE654F',
+        green: '#9CDE9F',
+        blue: '#C6D8FF',
+        greyLight: '2F3D4C',
     },
 };
 
 export const darkTheme: DefaultTheme = {
     colors: {
-        body: 'black',
-        text: 'white',
+        body: '#1F2933',
+        text: '#FFF',
+        red: '#FE654F',
+        green: '#9CDE9F',
+        blue: '#C6D8FF',
+        greyLight: '2F3D4C',
     },
 };
 
-export const breakpoints = {
-    pc: '769px',
-};
-
-export const mediaQueries = (key: keyof typeof breakpoints) => {
-    return (style: TemplateStringsArray | String) =>
-        `@media (min-width: ${breakpoints[key]}px) { ${style} }`;
+export const device = {
+    pc: '(min-width: 768px)',
 };

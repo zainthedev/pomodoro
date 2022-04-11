@@ -1,8 +1,10 @@
 import { ThemeProvider } from 'styled-components';
-import { lightTheme, darkTheme, GlobalStyle } from './theme';
+import { lightTheme, darkTheme, GlobalStyle } from './styles/theme';
 import { useState, useEffect } from 'react';
-import { ButtonToggle } from './styled-components/ButtonToggle';
 import { TimerComponent } from './components/TimerComponent';
+import { ButtonToggle } from './styled-components/ButtonToggle';
+import { AppWrapper } from './styled-components/AppWrapper';
+import { Header } from './styled-components/Header';
 
 function App() {
     const [theme, setTheme] = useState('light');
@@ -43,25 +45,28 @@ function App() {
 
     return (
         <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-            <TimerComponent
-                shortBreakLength={shortBreakLength}
-                longBreakLength={longBreakLength}
-                increasePomodoroCount={increasePomodoroCount}
-                isPomodoro={isPomodoro}
-                setIsPomodoro={setIsPomodoro}
-                isShortBreak={isShortBreak}
-                setIsShortBreak={setIsShortBreak}
-                setIsLongBreak={setIsLongBreak}
-                pomodoroCount={pomodoroCount}
-            />
-            <GlobalStyle />
-            <ButtonToggle data-test='switchThemeButton' onClick={switchTheme}>
-                SWITCH THEME
-            </ButtonToggle>
-            <h1>Pomodoro count: {pomodoroCount}</h1>
-            <p>IsPomodoro: {isPomodoro ? 'pomodoro' : false}</p>
-            <p>isShortBreak: {isShortBreak ? 'pomodoro' : false}</p>
-            <p>isLongBreak: {isLongBreak ? 'pomodoro' : false}</p>
+            <AppWrapper>
+                <Header>Pomodoro</Header>
+                <TimerComponent
+                    shortBreakLength={shortBreakLength}
+                    longBreakLength={longBreakLength}
+                    increasePomodoroCount={increasePomodoroCount}
+                    isPomodoro={isPomodoro}
+                    setIsPomodoro={setIsPomodoro}
+                    isShortBreak={isShortBreak}
+                    setIsShortBreak={setIsShortBreak}
+                    setIsLongBreak={setIsLongBreak}
+                    pomodoroCount={pomodoroCount}
+                />
+                <GlobalStyle />
+                <ButtonToggle
+                    data-test='switchThemeButton'
+                    onClick={switchTheme}
+                >
+                    SWITCH THEME
+                </ButtonToggle>
+                <h1>Pomodoro count: {pomodoroCount}</h1>
+            </AppWrapper>
         </ThemeProvider>
     );
 }
