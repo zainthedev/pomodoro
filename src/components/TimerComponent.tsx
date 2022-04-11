@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { renderTime } from '../helper-functions/renderTime';
 import {
-    TimerButton,
+    TimerButtonWrapper,
+    TimerResetButton,
+    TimerStartButton,
+    TimerStopButton,
     TimerTime,
     TimerWrapper,
 } from '../styled-components/Timer';
@@ -18,12 +21,11 @@ export const TimerComponent = ({
     setIsLongBreak,
     pomodoroCount,
 }: TimerProps) => {
-    const [timeRemaining, setTimeRemaining] = useState(0);
+    let pomodoroLength = 3;
+    const [timeRemaining, setTimeRemaining] = useState(pomodoroLength);
     const [isStarted, setIsStarted] = useState(false);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
-
-    let pomodoroLength = 3;
 
     useEffect(() => {
         if (isTimerRunning && timeRemaining > 0) {
@@ -49,7 +51,10 @@ export const TimerComponent = ({
                     setIsShortBreak(true);
                     setIsPomodoro(false);
                     setIsLongBreak(false);
-                    // setTimeRemaining(longBreakLength);
+
+                    setTimeout(() => {
+                        setTimeRemaining(longBreakLength);
+                    }, 1000);
 
                     // if (options.isAutoStart) {
                     // const interval = setInterval(() => {
@@ -61,7 +66,9 @@ export const TimerComponent = ({
                     setIsLongBreak(true);
                     setIsShortBreak(false);
                     setIsPomodoro(false);
-                    // setTimeRemaining(shortBreakLength);
+                    setTimeout(() => {
+                        setTimeRemaining(shortBreakLength);
+                    }, 1000);
                     // if (options.isAutoStart) {
                     // const interval = setInterval(() => {
                     //     startTimerLongBreak();
@@ -80,11 +87,13 @@ export const TimerComponent = ({
                 // }, 1000);
                 // return () => clearInterval(interval);
                 // }
-                // setTimeRemaining(pomodoroLength);
+                setTimeout(() => {
+                    setTimeRemaining(pomodoroLength);
+                }, 1000);
             }
 
             // if (!options.isAutoStart) {
-            // setIsTimerRunning(false);
+            setIsTimerRunning(false);
             // }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -151,18 +160,26 @@ export const TimerComponent = ({
             <TimerTime data-test='TimerTime'>
                 {renderTime(timeRemaining)}
             </TimerTime>
-            <TimerButton
-                data-test='TimerStartButton'
-                onClick={handleStartButtonClick}
-            >
-                START
-            </TimerButton>
-            <TimerButton data-test='TimerStopButton' onClick={stopTimer}>
-                STOP
-            </TimerButton>
-            <TimerButton data-test='TimerResetButton' onClick={resetTimer}>
-                RESET
-            </TimerButton>
+            <TimerButtonWrapper>
+                <TimerStartButton
+                    data-test='TimerStartButton'
+                    onClick={handleStartButtonClick}
+                >
+                    Start
+                </TimerStartButton>
+                <TimerStopButton
+                    data-test='TimerStopButton'
+                    onClick={stopTimer}
+                >
+                    Stop
+                </TimerStopButton>
+                <TimerResetButton
+                    data-test='TimerResetButton'
+                    onClick={resetTimer}
+                >
+                    Reset
+                </TimerResetButton>
+            </TimerButtonWrapper>
         </TimerWrapper>
     );
 };

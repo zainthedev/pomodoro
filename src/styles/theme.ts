@@ -4,29 +4,30 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background: ${({ theme }) => theme.colors.body};
         color: ${({ theme }) => theme.colors.text};
-        transition: background 0.2s ease-in, color 0.2s ease-in;
     }
 `;
 
 export const lightTheme: DefaultTheme = {
     colors: {
-        body: '#FFF',
-        text: '#1F2933',
-        startButton: '#9CDE9F',
-        stopButton: '#FE654F',
-        accent: '#C6D8FF',
-        container: '#F2F5F7',
+        body: '#fff',
+        text: '#1f2933',
+        startButton: '#9cde9f',
+        stopButton: '#fe654f',
+        accent: '#c6d8f',
+        container: '#f2f5f7',
+        shadow: '#cdd9df',
     },
 };
 
 export const darkTheme: DefaultTheme = {
     colors: {
-        body: '#1F2933',
-        text: '#FFF',
-        startButton: '#9CDE9F',
-        stopButton: '#FE654F',
-        accent: '#C6D8FF',
-        container: '#27353F',
+        body: '#1f2933',
+        text: '#fff',
+        startButton: '#9cde9f',
+        stopButton: '#fe654f',
+        accent: '#c6d8ff',
+        container: '#27353f',
+        shadow: '#172026',
     },
 };
 
