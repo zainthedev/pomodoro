@@ -5,10 +5,10 @@ declare module 'styled-components' {
         colors: {
             body: string;
             text: string;
-            red: string;
-            green: string;
-            blue: string;
-            greyLight: string;
+            startButton: string;
+            stopButton: string;
+            accent: string;
+            container: string;
         };
     }
 }

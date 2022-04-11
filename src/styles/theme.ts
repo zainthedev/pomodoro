@@ -12,10 +12,10 @@ export const lightTheme: DefaultTheme = {
     colors: {
         body: '#FFF',
         text: '#1F2933',
-        red: '#FE654F',
-        green: '#9CDE9F',
-        blue: '#C6D8FF',
-        greyLight: '2F3D4C',
+        startButton: '#9CDE9F',
+        stopButton: '#FE654F',
+        accent: '#C6D8FF',
+        container: '#F2F5F7',
     },
 };
 
@@ -23,10 +23,10 @@ export const darkTheme: DefaultTheme = {
     colors: {
         body: '#1F2933',
         text: '#FFF',
-        red: '#FE654F',
-        green: '#9CDE9F',
-        blue: '#C6D8FF',
-        greyLight: '2F3D4C',
+        startButton: '#9CDE9F',
+        stopButton: '#FE654F',
+        accent: '#C6D8FF',
+        container: '#27353F',
     },
 };
 
