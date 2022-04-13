@@ -13,7 +13,7 @@ export const lightTheme: DefaultTheme = {
         text: '#1f2933',
         startButton: '#9cde9f',
         stopButton: '#fe654f',
-        accent: '#c6d8f',
+        accent: '#c6d8ff',
         container: '#f2f5f7',
         shadow: '#cdd9df',
     },
