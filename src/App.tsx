@@ -59,12 +59,12 @@ function App() {
                     setIsLongBreak={setIsLongBreak}
                     pomodoroCount={pomodoroCount}
                 />
-                <ProgressComponent
+                {/* <ProgressComponent
                     isTimerRunning={isTimerRunning}
                     timeRemaining={timeRemaining}
                     totalLength={totalLength}
                     pomodoroCount={pomodoroCount}
-                />
+                /> */}
                 <GlobalStyle />
                 <ButtonToggle
                     data-test='switchThemeButton'

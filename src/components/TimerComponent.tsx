@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { renderTime } from '../helper-functions/renderTime';
 import {
     TimerButtonWrapper,
@@ -8,6 +8,7 @@ import {
     TimerTime,
 } from '../styled-components/Timer';
 import { TimerProps } from '../types/TimerTypes';
+import { timerReducer } from '../reducers/timerReducer';
 
 export const TimerComponent = ({
     shortBreakLength,
@@ -20,17 +21,15 @@ export const TimerComponent = ({
     setIsLongBreak,
     pomodoroCount,
 }: TimerProps) => {
-    let pomodoroLength = 3;
-    const [timeRemaining, setTimeRemaining] = useState(pomodoroLength);
+    const initialState = { time: 3, isRunning: false };
+    const [state, dispatch] = useReducer(timerReducer, initialState);
     const [isStarted, setIsStarted] = useState(false);
-    const [isTimerRunning, setIsTimerRunning] = useState(false);
-    const [isPaused, setIsPaused] = useState(false);
     const [totalLength, setTotalLength] = useState(0);
 
     useEffect(() => {
-        if (isTimerRunning && timeRemaining > 0) {
+        if (state.isRunning && state.time > 0) {
             const interval = setInterval(() => {
-                setTimeRemaining(timeRemaining - 1);
+                dispatch({ type: 'tick' });
             }, 1000);
             return () => clearInterval(interval);
         }
@@ -38,10 +37,10 @@ export const TimerComponent = ({
 
     useEffect(() => {
         // Create an interval to count down the timer
-        // If there's time reamining, count down
-        if (isStarted && timeRemaining === 0) {
+        // If there's time remaining, count down
+        if (isStarted && state.time === 0) {
             // Increase the total number of intervals. If the total number is odd (ie. a pomodoro has been completed), increase the total pomodoro count
-            setIsTimerRunning(false);
+            dispatch({ type: 'stop' });
 
             if (isPomodoro) {
                 increasePomodoroCount();
@@ -53,7 +52,10 @@ export const TimerComponent = ({
                     setIsLongBreak(false);
 
                     setTimeout(() => {
-                        setTimeRemaining(shortBreakLength);
+                        dispatch({
+                            type: 'setTime',
+                            payload: shortBreakLength,
+                        });
                     }, 1000);
 
                     // if (options.isAutoStart) {
@@ -68,7 +70,7 @@ export const TimerComponent = ({
                     setIsShortBreak(false);
                     setIsPomodoro(false);
                     setTimeout(() => {
-                        setTimeRemaining(longBreakLength);
+                        dispatch({ type: 'setTime', payload: longBreakLength });
                     }, 1000);
                     // if (options.isAutoStart) {
                     // const interval = setInterval(() => {
@@ -89,7 +91,7 @@ export const TimerComponent = ({
                 // return () => clearInterval(interval);
                 // }
                 setTimeout(() => {
-                    setTimeRemaining(pomodoroLength);
+                    dispatch({ type: 'setTime', payload: initialState.time });
                 }, 1000);
             }
 
@@ -97,35 +99,33 @@ export const TimerComponent = ({
             // }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [timeRemaining]);
+    }, [state.time]);
 
     useEffect(() => {
         const newTotalLength =
-            pomodoroLength * 4 + shortBreakLength * 3 + longBreakLength;
+            initialState.time * 4 + shortBreakLength * 3 + longBreakLength;
         setTotalLength(newTotalLength);
-    }, [pomodoroLength, shortBreakLength, longBreakLength]);
+    }, [initialState.time, shortBreakLength, longBreakLength]);
 
     const stopTimer = () => {
-        if (!isPaused) {
-            setIsTimerRunning(false);
-            setIsPaused(true);
+        if (state.isRunning) {
+            dispatch({ type: 'stop' });
         }
     };
 
     const startTimer = (time: number) => {
         if (
-            !isTimerRunning
+            !state.isRunning
             // || (
             // options.isAutoStart && isStarted)
         ) {
-            setTimeRemaining(time);
-            setIsTimerRunning(true);
-            setIsPaused(false);
+            dispatch({ type: 'setTime', payload: time });
+            dispatch({ type: 'start' });
         }
     };
 
     const startTimerPomodoro = () => {
-        startTimer(pomodoroLength);
+        startTimer(initialState.time);
 
         if (!isStarted) {
             setIsStarted(true);
@@ -141,9 +141,9 @@ export const TimerComponent = ({
     };
 
     const handleTimerButtonClick = () => {
-        if (isPaused) {
-            startTimer(timeRemaining);
-        } else if (isTimerRunning) {
+        if (!state.isRunning) {
+            startTimer(state.time);
+        } else if (state.isRunning) {
             stopTimer();
         } else {
             if (isPomodoro) {
@@ -158,32 +158,32 @@ export const TimerComponent = ({
 
     const resetTimer = () => {
         if (isPomodoro) {
-            setTimeRemaining(pomodoroLength);
+            dispatch({ type: 'setTime', payload: initialState.time });
         } else if (isShortBreak) {
-            setTimeRemaining(shortBreakLength);
+            dispatch({ type: 'setTime', payload: shortBreakLength });
         } else {
-            setTimeRemaining(longBreakLength);
+            dispatch({ type: 'setTime', payload: longBreakLength });
         }
-        setIsTimerRunning(false);
+        dispatch({ type: 'stop' });
     };
 
     return (
         <TimerWrapper>
             <TimerTime data-test='TimerTime'>
-                {renderTime(timeRemaining)}
+                {renderTime(state.time)}
             </TimerTime>
             <TimerButtonWrapper>
                 <TimerButton
                     data-test='TimerStartButton'
                     onClick={handleTimerButtonClick}
-                    isTimerRunning={isTimerRunning}
+                    isRunning={state.isRunning}
                 >
-                    {isTimerRunning ? 'Stop' : 'Start'}
+                    {state.isRunning ? 'Stop' : 'Start'}
                 </TimerButton>
                 <TimerResetButton
                     data-test='TimerResetButton'
                     onClick={resetTimer}
-                    isTimerRunning={isTimerRunning}
+                    isRunning={state.isRunning}
                 >
                     Reset
                 </TimerResetButton>

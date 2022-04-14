@@ -27,9 +27,9 @@ export const TimerButtonWrapper = styled.div`
     }
 `;
 
-export const TimerButton = styled.button<{ isTimerRunning: boolean }>`
+export const TimerButton = styled.button<{ isRunning: boolean }>`
     background: ${(props) =>
-        props.isTimerRunning
+        props.isRunning
             ? props.theme.colors.stopButton
             : props.theme.colors.startButton};
     border: none;
