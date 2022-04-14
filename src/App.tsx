@@ -5,6 +5,7 @@ import { TimerComponent } from './components/TimerComponent';
 import { ButtonToggle } from './styled-components/ButtonToggle';
 import { AppWrapper } from './styled-components/AppWrapper';
 import { Header } from './styled-components/Header';
+import { ProgressComponent } from './components/ProgressComponent';
 
 function App() {
     const [theme, setTheme] = useState('light');
@@ -13,8 +14,8 @@ function App() {
     const [isShortBreak, setIsShortBreak] = useState(false);
     const [isLongBreak, setIsLongBreak] = useState(false);
 
-    let shortBreakLength = 1;
-    let longBreakLength = 2;
+    let shortBreakLength = 2;
+    let longBreakLength = 5;
 
     function switchTheme() {
         const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -56,6 +57,12 @@ function App() {
                     isShortBreak={isShortBreak}
                     setIsShortBreak={setIsShortBreak}
                     setIsLongBreak={setIsLongBreak}
+                    pomodoroCount={pomodoroCount}
+                />
+                <ProgressComponent
+                    isTimerRunning={isTimerRunning}
+                    timeRemaining={timeRemaining}
+                    totalLength={totalLength}
                     pomodoroCount={pomodoroCount}
                 />
                 <GlobalStyle />

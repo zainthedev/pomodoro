@@ -2,11 +2,10 @@ import { useState, useEffect } from 'react';
 import { renderTime } from '../helper-functions/renderTime';
 import {
     TimerButtonWrapper,
+    TimerButton,
     TimerResetButton,
-    TimerStartButton,
-    TimerStopButton,
-    TimerTime,
     TimerWrapper,
+    TimerTime,
 } from '../styled-components/Timer';
 import { TimerProps } from '../types/TimerTypes';
 
@@ -26,6 +25,7 @@ export const TimerComponent = ({
     const [isStarted, setIsStarted] = useState(false);
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
+    const [totalLength, setTotalLength] = useState(0);
 
     useEffect(() => {
         if (isTimerRunning && timeRemaining > 0) {
@@ -41,19 +41,19 @@ export const TimerComponent = ({
         // If there's time reamining, count down
         if (isStarted && timeRemaining === 0) {
             // Increase the total number of intervals. If the total number is odd (ie. a pomodoro has been completed), increase the total pomodoro count
+            setIsTimerRunning(false);
 
-            // If odd, increase pom count and take a break
             if (isPomodoro) {
                 increasePomodoroCount();
 
-                // If 4 pomodoros have been completed, take a long break
+                // If a multiple of 4 pomodoros haven't been completed, take a short break
                 if (pomodoroCount + 1 < 4 || (pomodoroCount + 1) % 4) {
                     setIsShortBreak(true);
                     setIsPomodoro(false);
                     setIsLongBreak(false);
 
                     setTimeout(() => {
-                        setTimeRemaining(longBreakLength);
+                        setTimeRemaining(shortBreakLength);
                     }, 1000);
 
                     // if (options.isAutoStart) {
@@ -63,11 +63,12 @@ export const TimerComponent = ({
                     // return () => clearInterval(interval);
                     // }
                 } else {
+                    // If 4 pomodoros have been completed, take a long break
                     setIsLongBreak(true);
                     setIsShortBreak(false);
                     setIsPomodoro(false);
                     setTimeout(() => {
-                        setTimeRemaining(shortBreakLength);
+                        setTimeRemaining(longBreakLength);
                     }, 1000);
                     // if (options.isAutoStart) {
                     // const interval = setInterval(() => {
@@ -93,11 +94,16 @@ export const TimerComponent = ({
             }
 
             // if (!options.isAutoStart) {
-            setIsTimerRunning(false);
             // }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [timeRemaining]);
+
+    useEffect(() => {
+        const newTotalLength =
+            pomodoroLength * 4 + shortBreakLength * 3 + longBreakLength;
+        setTotalLength(newTotalLength);
+    }, [pomodoroLength, shortBreakLength, longBreakLength]);
 
     const stopTimer = () => {
         if (!isPaused) {
@@ -114,11 +120,13 @@ export const TimerComponent = ({
         ) {
             setTimeRemaining(time);
             setIsTimerRunning(true);
+            setIsPaused(false);
         }
     };
 
     const startTimerPomodoro = () => {
         startTimer(pomodoroLength);
+
         if (!isStarted) {
             setIsStarted(true);
         }
@@ -132,9 +140,11 @@ export const TimerComponent = ({
         startTimer(longBreakLength);
     };
 
-    const handleStartButtonClick = () => {
+    const handleTimerButtonClick = () => {
         if (isPaused) {
             startTimer(timeRemaining);
+        } else if (isTimerRunning) {
+            stopTimer();
         } else {
             if (isPomodoro) {
                 startTimerPomodoro();
@@ -146,12 +156,14 @@ export const TimerComponent = ({
         }
     };
 
-    // Todo: Create a reset confirmation modal
     const resetTimer = () => {
-        setIsPomodoro(true);
-        setIsLongBreak(false);
-        setIsShortBreak(false);
-        setTimeRemaining(pomodoroLength);
+        if (isPomodoro) {
+            setTimeRemaining(pomodoroLength);
+        } else if (isShortBreak) {
+            setTimeRemaining(shortBreakLength);
+        } else {
+            setTimeRemaining(longBreakLength);
+        }
         setIsTimerRunning(false);
     };
 
@@ -161,21 +173,17 @@ export const TimerComponent = ({
                 {renderTime(timeRemaining)}
             </TimerTime>
             <TimerButtonWrapper>
-                <TimerStartButton
+                <TimerButton
                     data-test='TimerStartButton'
-                    onClick={handleStartButtonClick}
+                    onClick={handleTimerButtonClick}
+                    isTimerRunning={isTimerRunning}
                 >
-                    Start
-                </TimerStartButton>
-                <TimerStopButton
-                    data-test='TimerStopButton'
-                    onClick={stopTimer}
-                >
-                    Stop
-                </TimerStopButton>
+                    {isTimerRunning ? 'Stop' : 'Start'}
+                </TimerButton>
                 <TimerResetButton
                     data-test='TimerResetButton'
                     onClick={resetTimer}
+                    isTimerRunning={isTimerRunning}
                 >
                     Reset
                 </TimerResetButton>
