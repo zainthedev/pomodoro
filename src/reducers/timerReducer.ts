@@ -1,14 +1,4 @@
-type ActionTypes =
-    | { type: 'setTime'; payload: number }
-    | { type: 'tick' }
-    | { type: 'start' }
-    | { type: 'stop' }
-    | { type: 'reset' };
-
-interface StateTypes {
-    time: number;
-    isRunning: boolean;
-}
+import { ActionTypes, StateTypes } from '../types/TimerReducerTypes';
 
 export const timerReducer = (
     state: StateTypes,
@@ -18,13 +8,19 @@ export const timerReducer = (
         case 'setTime':
             return { ...state, time: action.payload };
         case 'start':
-            return { ...state, isRunning: true };
+            return { ...state, isRunning: true, isStarted: true };
         case 'stop':
             return { ...state, isRunning: false };
-        case 'reset':
-            return { isRunning: false, time: 0 };
         case 'tick':
             return { ...state, time: state.time - 1 };
+        case 'increasePomodoroCount':
+            return { ...state, pomodoroCount: state.pomodoroCount + 1 };
+        case 'setShortBreakLength':
+            return { ...state, shortBreakLength: action.payload };
+        case 'setLongBreakLength':
+            return { ...state, longBreakLength: action.payload };
+        case 'setTimerType':
+            return { ...state, timerType: action.payload };
         default:
             throw new Error();
     }

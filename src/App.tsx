@@ -1,21 +1,17 @@
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyle } from './styles/theme';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import { TimerComponent } from './components/TimerComponent';
 import { ButtonToggle } from './styled-components/ButtonToggle';
 import { AppWrapper } from './styled-components/AppWrapper';
 import { Header } from './styled-components/Header';
 import { ProgressComponent } from './components/ProgressComponent';
+import { timerReducer } from './reducers/timerReducer';
+import { AppContext, initialState } from './contexts/AppContext';
 
 function App() {
+    const [state, dispatch] = useReducer(timerReducer, initialState);
     const [theme, setTheme] = useState('light');
-    const [pomodoroCount, setPomodoroCount] = useState(0);
-    const [isPomodoro, setIsPomodoro] = useState(true);
-    const [isShortBreak, setIsShortBreak] = useState(false);
-    const [isLongBreak, setIsLongBreak] = useState(false);
-
-    let shortBreakLength = 2;
-    let longBreakLength = 5;
 
     function switchTheme() {
         const newTheme = theme === 'light' ? 'dark' : 'light';
@@ -40,41 +36,24 @@ function App() {
         }
     }, []);
 
-    const increasePomodoroCount = () => {
-        setPomodoroCount(pomodoroCount + 1);
-    };
-
     return (
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
-            <AppWrapper>
-                <Header>Pomodoro</Header>
-                <TimerComponent
-                    shortBreakLength={shortBreakLength}
-                    longBreakLength={longBreakLength}
-                    increasePomodoroCount={increasePomodoroCount}
-                    isPomodoro={isPomodoro}
-                    setIsPomodoro={setIsPomodoro}
-                    isShortBreak={isShortBreak}
-                    setIsShortBreak={setIsShortBreak}
-                    setIsLongBreak={setIsLongBreak}
-                    pomodoroCount={pomodoroCount}
-                />
-                {/* <ProgressComponent
-                    isTimerRunning={isTimerRunning}
-                    timeRemaining={timeRemaining}
-                    totalLength={totalLength}
-                    pomodoroCount={pomodoroCount}
-                /> */}
-                <GlobalStyle />
-                <ButtonToggle
-                    data-test='switchThemeButton'
-                    onClick={switchTheme}
-                >
-                    SWITCH THEME
-                </ButtonToggle>
-                <h1>Pomodoro count: {pomodoroCount}</h1>
-            </AppWrapper>
-        </ThemeProvider>
+        <AppContext.Provider value={{ state, dispatch }}>
+            <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+                <AppWrapper>
+                    <Header>Pomodoro</Header>
+                    <TimerComponent />
+                    <ProgressComponent />
+                    <GlobalStyle />
+                    <ButtonToggle
+                        data-test='switchThemeButton'
+                        onClick={switchTheme}
+                    >
+                        SWITCH THEME
+                    </ButtonToggle>
+                    <h1>Pomodoro count: {state.pomodoroCount}</h1>
+                </AppWrapper>
+            </ThemeProvider>
+        </AppContext.Provider>
     );
 }
 

@@ -13,13 +13,15 @@ export const ProgressBar = styled.div`
 `;
 
 export const ProgressBarInner = styled.div<{
-    isTimerRunning: boolean;
+    isRunning: boolean;
     currentProgress: number;
 }>`
     background: ${(props) => props.theme.colors.accent};
-    width: ${(props) => props.currentProgress}%;
+    /* width: ${(props) => props.currentProgress}%; */
+    width: 100%;
+    transform: translateX(${(props) => props.currentProgress}%);
     height: 8vw;
-    transition: width 0.5s ease-in-out;
+    transition: transform 0.5s linear;
 
     @media ${device.pc} {
         height: 30px;
