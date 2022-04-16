@@ -8,6 +8,7 @@ import { Header } from './styled-components/Header';
 import { ProgressComponent } from './components/ProgressComponent';
 import { timerReducer } from './reducers/timerReducer';
 import { AppContext, initialState } from './contexts/AppContext';
+import { SettingsComponent } from './components/SettingsComponent';
 
 function App() {
     const [state, dispatch] = useReducer(timerReducer, initialState);
@@ -47,18 +48,8 @@ function App() {
                     <Header>Pomodoro</Header>
                     <TimerComponent />
                     <ProgressComponent />
+                    <SettingsComponent switchTheme={switchTheme} />
                     <GlobalStyle />
-                    <ButtonToggle
-                        data-test='switchThemeButton'
-                        onClick={switchTheme}
-                    >
-                        SWITCH THEME
-                    </ButtonToggle>
-                    <h1>Pomodoro count: {state.pomodoroCount}</h1>
-
-                    <button onClick={setShortBreakLength}>
-                        set short break length
-                    </button>
                 </AppWrapper>
             </ThemeProvider>
         </AppContext.Provider>
