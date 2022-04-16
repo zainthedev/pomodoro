@@ -17,8 +17,8 @@ export const StatusText = styled.h3`
     margin-bottom: 5vw;
 
     @media ${device.pc} {
-        margin-bottom: 20px;
         font-size: 30px;
+        margin-bottom: 20px;
     }
 `;
 

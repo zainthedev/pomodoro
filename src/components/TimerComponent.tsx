@@ -12,6 +12,9 @@ import {
     VolumeText,
     VolumeIcon,
     VolumeMuteIcon,
+    PomodoroImage,
+    PomodoroText,
+    PomodoroCount,
 } from '../styled-components/Timer';
 
 export const TimerComponent = () => {
@@ -86,6 +89,10 @@ export const TimerComponent = () => {
                 {state.options.volume ? <VolumeIcon /> : <VolumeMuteIcon />}
                 <VolumeText>{state.options.volume * 100}%</VolumeText>
             </VolumeWrapper>
+            <PomodoroCount>
+                <PomodoroImage />
+                <PomodoroText>{state.pomodoroCount}</PomodoroText>
+            </PomodoroCount>
             <TimerTime data-test='TimerTime'>
                 {renderTime(state.time)}
             </TimerTime>

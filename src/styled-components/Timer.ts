@@ -3,6 +3,7 @@ import { device } from '../styles/theme';
 import { Container } from './Container';
 import { ReactComponent as SpeakerIcon } from '../assets/images/speaker.svg';
 import { ReactComponent as SpeakerMuteIcon } from '../assets/images/speaker_mute.svg';
+import { ReactComponent as PomodoroIcon } from '../assets/images/tomato.svg';
 
 export const TimerWrapper = styled(Container)`
     border-radius: 10px 10px 0 0;
@@ -48,6 +49,45 @@ export const VolumeText = styled.span`
 
     @media ${device.pc} {
         font-size: 12px;
+    }
+`;
+
+export const PomodoroCount = styled.div`
+    align-items: center;
+    display: flex;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(10%, 10%);
+`;
+
+export const PomodoroImage = styled(PomodoroIcon)`
+    width: 12vw;
+    height: 12vw;
+    flex-shrink: 0;
+    & * {
+        fill: ${(props) => props.theme.colors.stopButton};
+    }
+
+    @media ${device.pc} {
+        width: 60px;
+        height: 60px;
+    }
+`;
+
+export const PomodoroText = styled.span`
+    text-shadow: 0px 0px 6px ${({ theme }) => theme.colors.accent};
+    font-size: 6vw;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    top: 0;
+    transform: translateY(70%);
+    width: 12vw;
+
+    @media ${device.pc} {
+        font-size: 30px;
+        width: 60px;
     }
 `;
 
