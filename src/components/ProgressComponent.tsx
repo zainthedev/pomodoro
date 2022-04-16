@@ -33,6 +33,8 @@ export const ProgressComponent = () => {
                 case 'longBreak':
                     return 'Take a long break. Relax.';
             }
+        } else if (state.isPaused) {
+            return 'Paused.';
         } else {
             switch (state.timerType) {
                 case 'pomodoro':

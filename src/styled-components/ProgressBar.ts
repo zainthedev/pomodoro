@@ -38,6 +38,7 @@ export const ProgressBar = styled.div`
 export const ProgressText = styled.p`
     align-items: center;
     display: flex;
+    font-size: 4vw;
     justify-content: center;
     height: 100%;
     left: 0;
@@ -45,6 +46,10 @@ export const ProgressText = styled.p`
     top: 0;
     width: 100%;
     z-index: 1;
+
+    @media ${device.pc} {
+        font-size: 16px;
+    }
 `;
 
 export const ProgressBarInner = styled.div<{

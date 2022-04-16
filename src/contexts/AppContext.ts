@@ -13,8 +13,12 @@ export const initialState = {
     shortBreakLength: shortBreakLength,
     longBreakLength: longBreakLength,
     timerType: 'pomodoro',
+    isPaused: false,
     totalLength: pomodoroLength * 4 + shortBreakLength * 3 + longBreakLength,
     currentProgress: -100,
+    options: {
+        volume: 0,
+    },
 };
 
 export const AppContext = createContext<{

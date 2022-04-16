@@ -8,8 +8,13 @@ export type ActionTypes =
     | { type: 'setShortBreakLength'; payload: number }
     | { type: 'setLongBreakLength'; payload: number }
     | { type: 'setTimerType'; payload: string }
-    | { type: 'setProgress'; payload: number };
+    | { type: 'setIsPaused' }
+    | { type: 'setProgress'; payload: number }
+    | { type: 'setOptions'; payload: OptionTypes };
 
+export interface OptionTypes {
+    volume: number;
+}
 export interface StateTypes {
     time: number;
     isRunning: boolean;
@@ -19,5 +24,7 @@ export interface StateTypes {
     longBreakLength: number;
     totalLength: number;
     timerType: string;
+    isPaused: boolean;
     currentProgress: number;
+    options: OptionTypes;
 }

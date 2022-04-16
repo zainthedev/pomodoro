@@ -66,11 +66,15 @@ export const timerReducer = (
             return { ...state, longBreakLength: action.payload };
         case 'setTimerType':
             return { ...state, timerType: action.payload };
+        case 'setIsPaused':
+            return { ...state, isPaused: !state.isPaused };
         case 'setProgress':
             return {
                 ...state,
                 currentProgress: state.currentProgress + action.payload,
             };
+        case 'setOptions':
+            return { ...state, options: action.payload };
         default:
             throw new Error();
     }

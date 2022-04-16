@@ -8,6 +8,10 @@ import {
     TimerResetButton,
     TimerWrapper,
     TimerTime,
+    VolumeWrapper,
+    VolumeText,
+    VolumeIcon,
+    VolumeMuteIcon,
 } from '../styled-components/Timer';
 
 export const TimerComponent = () => {
@@ -19,6 +23,7 @@ export const TimerComponent = () => {
 
     const stopTimer = () => {
         dispatch({ type: 'stop' });
+        dispatch({ type: 'setIsPaused' });
     };
 
     const startTimer = (time: number) => {
@@ -58,8 +63,29 @@ export const TimerComponent = () => {
         dispatch({ type: 'reset' });
     };
 
+    const toggleAudio = () => {
+        const isMuted = !state.options.volume;
+        function getVolume() {
+            if (state.options.volume) {
+                return state.options.volume;
+            } else {
+                return 1;
+            }
+        }
+        dispatch({
+            type: 'setOptions',
+            payload: isMuted
+                ? { ...state.options, volume: getVolume() }
+                : { ...state.options, volume: 0 },
+        });
+    };
+
     return (
         <TimerWrapper>
+            <VolumeWrapper onClick={toggleAudio}>
+                {state.options.volume ? <VolumeIcon /> : <VolumeMuteIcon />}
+                <VolumeText>{state.options.volume * 100}%</VolumeText>
+            </VolumeWrapper>
             <TimerTime data-test='TimerTime'>
                 {renderTime(state.time)}
             </TimerTime>

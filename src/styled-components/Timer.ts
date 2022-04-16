@@ -1,9 +1,54 @@
 import styled from 'styled-components';
 import { device } from '../styles/theme';
 import { Container } from './Container';
+import { ReactComponent as SpeakerIcon } from '../assets/images/speaker.svg';
+import { ReactComponent as SpeakerMuteIcon } from '../assets/images/speaker_mute.svg';
 
 export const TimerWrapper = styled(Container)`
     border-radius: 10px 10px 0 0;
+    position: relative;
+`;
+
+export const VolumeWrapper = styled.div`
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(-50%, 25%);
+    width: 8vw;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    @media ${device.pc} {
+        width: 30px;
+    }
+`;
+
+export const VolumeIcon = styled(SpeakerIcon)`
+    & *:not(rect) {
+        stroke: ${(props) => props.theme.colors.text};
+    }
+`;
+export const VolumeMuteIcon = styled(SpeakerMuteIcon)`
+    & *:not(rect) {
+        stroke: ${(props) => props.theme.colors.text};
+    }
+`;
+
+export const VolumeText = styled.span`
+    font-size: 3vw;
+
+    @media ${device.pc} {
+        font-size: 12px;
+    }
 `;
 
 export const TimerTime = styled.h2`

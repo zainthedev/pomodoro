@@ -3,6 +3,15 @@ import { AppContext, initialState } from '../contexts/AppContext';
 
 export const useTimer = (isPomodoro: boolean) => {
     const { state, dispatch } = useContext(AppContext);
+    const alarmPomodoro = new Audio(require('../assets/sounds/bell_1.mp3'));
+    const alarmBreak = new Audio(require('../assets/sounds/bell_2.mp3'));
+
+    function playAudio(audio: HTMLAudioElement) {
+        audio.volume = state.options.volume;
+        audio.play();
+    }
+
+    // Tick the timer down every second
     useEffect(() => {
         if (state.isRunning && state.time > 0) {
             const interval = setInterval(() => {
@@ -12,14 +21,14 @@ export const useTimer = (isPomodoro: boolean) => {
         }
     });
 
+    // If there's time remaining, count down
     useEffect(() => {
-        // Create an interval to count down the timer
-        // If there's time remaining, count down
-        if (state.isStarted && state.time === 0) {
+        if (state.isStarted && !state.time) {
             // Increase the total number of intervals. If the total number is odd (ie. a pomodoro has been completed), increase the total pomodoro count
 
             if (isPomodoro) {
                 dispatch({ type: 'increasePomodoroCount' });
+                playAudio(alarmPomodoro);
 
                 // If a multiple of 4 pomodoros haven't been completed, take a short break
                 if (
@@ -70,6 +79,8 @@ export const useTimer = (isPomodoro: boolean) => {
                     type: 'setTimerType',
                     payload: 'pomodoro',
                 });
+                playAudio(alarmBreak);
+
                 // if (options.isAutoStart) {
 
                 // const interval = setInterval(() => {
@@ -81,6 +92,10 @@ export const useTimer = (isPomodoro: boolean) => {
                     dispatch({ type: 'setTime', payload: initialState.time });
                     dispatch({ type: 'stop' });
                 }, 1000);
+            }
+
+            if (state.isPaused) {
+                dispatch({ type: 'setIsPaused' });
             }
 
             // if (!options.isAutoStart) {
