@@ -9,7 +9,7 @@ export const Container = styled.div`
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    padding: 10vw 0;
+    padding: 7vw 0;
     width: 90%;
 
     @media ${device.pc} {

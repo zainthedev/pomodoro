@@ -1,51 +1,62 @@
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { AppContext } from '../contexts/AppContext';
 import {
     ProgressBar,
     ProgressBarInner,
+    ProgressBarWrapper,
+    ProgressText,
+    StatusText,
 } from '../styled-components/ProgressBar';
 
 export const ProgressComponent = () => {
-    const { state } = useContext(AppContext);
-    const [currentProgress, setCurrentProgress] = useState(-100);
-    const [totalLength, setTotalLength] = useState(0);
+    const { state, dispatch } = useContext(AppContext);
 
+    // Reset the progress bar when it reaches 0 (not exact)
     useEffect(() => {
-        const newTotalLength =
-            state.time * 4 + state.shortBreakLength * 3 + state.longBreakLength;
-        setTotalLength(newTotalLength);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state.shortBreakLength, state.longBreakLength]);
-
-    useEffect(() => {
-        setTimeout(() => {
-            console.log(currentProgress <= 0 && state.isRunning);
-            console.log('state.isRunning above');
-            if (currentProgress <= 0 && state.isRunning && state.time !== 0) {
-                // if (currentProgress <= 0 && state.isRunning) {
-                console.log('hi');
-                const increment = 100 / totalLength;
-
-                setCurrentProgress(currentProgress + increment);
-            }
-        }, 1000);
-    }, [state.isRunning, state.time]);
-
-    useEffect(() => {
-        if (currentProgress >= 0 || currentProgress >= -1) {
+        if (
+            Math.ceil(state.currentProgress) === 0 ||
+            Math.floor(state.currentProgress) === 0
+        ) {
             setTimeout(() => {
-                console.log('resetting');
-                setCurrentProgress(-100);
+                dispatch({ type: 'setProgress', payload: -100 });
             }, 1000);
         }
-    }, [currentProgress]);
+    }, [state.currentProgress, dispatch]);
+
+    const setStatusText = () => {
+        if (state.isRunning && state.time) {
+            switch (state.timerType) {
+                case 'pomodoro':
+                    return 'Focus.';
+                case 'shortBreak':
+                    return 'Take a short break.';
+                case 'longBreak':
+                    return 'Take a long break. Relax.';
+            }
+        } else {
+            switch (state.timerType) {
+                case 'pomodoro':
+                    return 'Start a pomodoro.';
+                case 'shortBreak':
+                    return 'Next, a short break.';
+                case 'longBreak':
+                    return 'Finally, a long break.';
+            }
+        }
+    };
 
     return (
-        <ProgressBar>
-            <ProgressBarInner
-                isRunning={state.isRunning}
-                currentProgress={currentProgress}
-            />
-        </ProgressBar>
+        <ProgressBarWrapper>
+            <StatusText>{setStatusText()}</StatusText>
+            <ProgressBar>
+                <ProgressText>
+                    {100 + Math.floor(state.currentProgress)}%
+                </ProgressText>
+                <ProgressBarInner
+                    isRunning={state.isRunning}
+                    currentProgress={state.currentProgress}
+                />
+            </ProgressBar>
+        </ProgressBarWrapper>
     );
 };

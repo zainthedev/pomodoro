@@ -1,3 +1,4 @@
+import { initialState } from '../contexts/AppContext';
 import { ActionTypes, StateTypes } from '../types/TimerReducerTypes';
 
 export const timerReducer = (
@@ -12,7 +13,51 @@ export const timerReducer = (
         case 'stop':
             return { ...state, isRunning: false };
         case 'tick':
-            return { ...state, time: state.time - 1 };
+            if (state.timerType === 'pomodoro') {
+                return {
+                    ...state,
+                    time: state.time - 1,
+                    currentProgress:
+                        state.currentProgress + 100 / initialState.time,
+                };
+            } else if (state.timerType === 'shortBreak') {
+                return {
+                    ...state,
+                    time: state.time - 1,
+                    currentProgress:
+                        state.currentProgress + 100 / state.shortBreakLength,
+                };
+            } else {
+                return {
+                    ...state,
+                    time: state.time - 1,
+                    currentProgress:
+                        state.currentProgress + 100 / state.longBreakLength,
+                };
+            }
+        case 'reset':
+            if (state.timerType === 'pomodoro') {
+                return {
+                    ...state,
+                    time: initialState.time,
+                    isRunning: false,
+                    currentProgress: -100,
+                };
+            } else if (state.timerType === 'shortBreak') {
+                return {
+                    ...state,
+                    time: state.shortBreakLength,
+                    isRunning: false,
+                    currentProgress: -100,
+                };
+            } else {
+                return {
+                    ...state,
+                    time: state.longBreakLength,
+                    isRunning: false,
+                    currentProgress: -100,
+                };
+            }
         case 'increasePomodoroCount':
             return { ...state, pomodoroCount: state.pomodoroCount + 1 };
         case 'setShortBreakLength':
@@ -21,6 +66,11 @@ export const timerReducer = (
             return { ...state, longBreakLength: action.payload };
         case 'setTimerType':
             return { ...state, timerType: action.payload };
+        case 'setProgress':
+            return {
+                ...state,
+                currentProgress: state.currentProgress + action.payload,
+            };
         default:
             throw new Error();
     }

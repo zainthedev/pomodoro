@@ -25,7 +25,7 @@ export const darkTheme: DefaultTheme = {
         text: '#fff',
         startButton: '#9cde9f',
         stopButton: '#fe654f',
-        accent: '#c6d8ff',
+        accent: '#3e5a7a',
         container: '#27353f',
         shadow: '#172026',
     },

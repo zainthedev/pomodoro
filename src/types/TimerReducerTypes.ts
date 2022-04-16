@@ -3,10 +3,12 @@ export type ActionTypes =
     | { type: 'tick' }
     | { type: 'start' }
     | { type: 'stop' }
+    | { type: 'reset' }
     | { type: 'increasePomodoroCount' }
     | { type: 'setShortBreakLength'; payload: number }
     | { type: 'setLongBreakLength'; payload: number }
-    | { type: 'setTimerType'; payload: string };
+    | { type: 'setTimerType'; payload: string }
+    | { type: 'setProgress'; payload: number };
 
 export interface StateTypes {
     time: number;
@@ -17,4 +19,5 @@ export interface StateTypes {
     longBreakLength: number;
     totalLength: number;
     timerType: string;
+    currentProgress: number;
 }

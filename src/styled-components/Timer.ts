@@ -8,9 +8,11 @@ export const TimerWrapper = styled(Container)`
 
 export const TimerTime = styled.h2`
     font-size: 18vw;
+    margin-bottom: 8vw;
 
     @media ${device.pc} {
         font-size: 70px;
+        margin-bottom: 30px;
     }
 `;
 

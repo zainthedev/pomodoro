@@ -1,15 +1,20 @@
 import { ActionTypes, StateTypes } from '../types/TimerReducerTypes';
 import { createContext } from 'react';
 
+const pomodoroLength = 3;
+const shortBreakLength = 1;
+const longBreakLength = 2;
+
 export const initialState = {
-    time: 3,
+    time: pomodoroLength,
     isRunning: false,
     isStarted: false,
     pomodoroCount: 0,
-    shortBreakLength: 3,
-    longBreakLength: 5,
+    shortBreakLength: shortBreakLength,
+    longBreakLength: longBreakLength,
     timerType: 'pomodoro',
-    totalLength: 3 * 4 + 3 * 3 + 5,
+    totalLength: pomodoroLength * 4 + shortBreakLength * 3 + longBreakLength,
+    currentProgress: -100,
 };
 
 export const AppContext = createContext<{

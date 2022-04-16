@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { AppContext, initialState } from '../contexts/AppContext';
 import { renderTime } from '../helper-functions/renderTime';
 import { useTimer } from '../hooks/useTimer';
@@ -55,14 +55,7 @@ export const TimerComponent = () => {
     };
 
     const resetTimer = () => {
-        if (isPomodoro) {
-            dispatch({ type: 'setTime', payload: initialState.time });
-        } else if (isShortBreak) {
-            dispatch({ type: 'setTime', payload: state.shortBreakLength });
-        } else {
-            dispatch({ type: 'setTime', payload: state.longBreakLength });
-        }
-        dispatch({ type: 'stop' });
+        dispatch({ type: 'reset' });
     };
 
     return (

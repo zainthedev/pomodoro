@@ -19,6 +19,10 @@ function App() {
         setTheme(newTheme);
     }
 
+    function setShortBreakLength() {
+        dispatch({ type: 'setShortBreakLength', payload: 10 });
+    }
+
     // Set the current theme based on localStorage or the system theme
     useEffect(() => {
         // Get the saved theme in local storage
@@ -51,6 +55,10 @@ function App() {
                         SWITCH THEME
                     </ButtonToggle>
                     <h1>Pomodoro count: {state.pomodoroCount}</h1>
+
+                    <button onClick={setShortBreakLength}>
+                        set short break length
+                    </button>
                 </AppWrapper>
             </ThemeProvider>
         </AppContext.Provider>
