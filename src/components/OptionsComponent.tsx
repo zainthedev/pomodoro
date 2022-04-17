@@ -118,7 +118,9 @@ export const OptionsComponent = () => {
             </OptionWrapper>
             <OptionWrapper>
                 <OptionLabelWrapper onClick={(e) => toggleTheme(e)}>
-                    <OptionLabel>Theme</OptionLabel>
+                    <OptionLabel>
+                        Theme: {isLightMode ? 'Light' : 'Dark'}
+                    </OptionLabel>
                     <OptionBoxWrapper>
                         <OptionBox
                             alt='Theme selector (Sun or moon)'
