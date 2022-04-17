@@ -87,6 +87,7 @@ export const OptionLabelWarning = styled(OptionLabel)`
 export const OptionLabelVolume = styled(OptionLabel)`
     text-align: center;
     margin-bottom: 2.67vw;
+    justify-content: center;
     width: 100%;
 
     @media ${device.pc} {

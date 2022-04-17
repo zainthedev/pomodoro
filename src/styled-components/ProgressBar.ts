@@ -26,11 +26,13 @@ export const ProgressBar = styled.div`
     box-shadow: 0 0 7px 1px ${(props) => props.theme.colors.shadow};
     height: 5.33vw;
     overflow: hidden;
+    padding: 0.8vw 0;
     position: relative;
     text-align: center;
     width: 90%;
 
     @media ${device.pc} {
+        padding: 3px 0;
         height: 20px;
     }
 `;
@@ -58,11 +60,12 @@ export const ProgressBarInner = styled.div<{
 }>`
     background: ${(props) => props.theme.colors.accent};
     width: 100%;
-    transform: translateX(${(props) => props.currentProgress}%);
+    transform: translate(${(props) => props.currentProgress}%, -0.8vw);
     height: 8vw;
     transition: transform 0.5s linear;
 
     @media ${device.pc} {
         height: 30px;
+        transform: translate(${(props) => props.currentProgress}%, -3px);
     }
 `;
