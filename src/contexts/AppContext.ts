@@ -1,7 +1,7 @@
 import { ActionTypes, StateTypes } from '../types/TimerReducerTypes';
 import { createContext } from 'react';
 
-const pomodoroLength = 1;
+const pomodoroLength = 25 * 60;
 const shortBreakLength = 5 * 60;
 const longBreakLength = 10 * 60;
 

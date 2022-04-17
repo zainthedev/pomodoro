@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 import { AppContext } from '../contexts/AppContext';
-import { ButtonToggle } from '../styled-components/ButtonToggle';
 import {
     Options,
     OptionWrapper,

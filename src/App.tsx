@@ -1,8 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme, GlobalStyle } from './styles/theme';
-import { useState, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { TimerComponent } from './components/TimerComponent';
-import { ButtonToggle } from './styled-components/ButtonToggle';
 import { AppWrapper } from './styled-components/AppWrapper';
 import { Header } from './styled-components/Header';
 import { ProgressComponent } from './components/ProgressComponent';
