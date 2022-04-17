@@ -1,4 +1,5 @@
 export type ActionTypes =
+    | { type: 'setTheme'; payload?: string }
     | { type: 'setTime'; payload: number }
     | { type: 'tick' }
     | { type: 'start' }
@@ -10,12 +11,14 @@ export type ActionTypes =
     | { type: 'setTimerType'; payload: string }
     | { type: 'setIsPaused' }
     | { type: 'setProgress'; payload: number }
-    | { type: 'setOptions'; payload: OptionTypes };
+    | { type: 'setOptions'; payload: OptionTypes }
+    | { type: 'toggleOptions' };
 
 export interface OptionTypes {
     volume: number;
 }
 export interface StateTypes {
+    theme: string;
     time: number;
     isRunning: boolean;
     isStarted: boolean;
@@ -27,4 +30,5 @@ export interface StateTypes {
     isPaused: boolean;
     currentProgress: number;
     options: OptionTypes;
+    isOptionsOpen: boolean;
 }

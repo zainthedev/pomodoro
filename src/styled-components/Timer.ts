@@ -30,6 +30,10 @@ export const VolumeWrapper = styled.div`
 
     @media ${device.pc} {
         width: 30px;
+
+        &:hover {
+            opacity: 0.8;
+        }
     }
 `;
 
@@ -128,7 +132,7 @@ export const TimerButton = styled.button<{ isRunning: boolean }>`
     transition: background 0.1s ease-in;
 
     &:first-child {
-        margin: 0 0 10vw;
+        margin: 0 0 8vw;
     }
 
     @media ${device.pc} {

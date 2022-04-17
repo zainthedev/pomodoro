@@ -6,31 +6,40 @@ import {
     SettingsToggle,
     SettingsLabel,
     SettingsIcon,
+    OptionsModal,
+    OptionsWrapperModal,
     OptionsWrapper,
 } from '../styled-components/Settings';
-import { SettingsTypes } from '../types/SettingsTypes';
+import { OptionsComponent } from './OptionsComponent';
 
-export const SettingsComponent = (props: SettingsTypes) => {
+export const SettingsComponent = () => {
     const { state, dispatch } = useContext(AppContext);
-    const [isOpen, setIsOpen] = useState(false);
 
-    function toggleOptions() {
-        setIsOpen(!isOpen);
+    function closeModal(e: React.MouseEvent<HTMLElement>) {
+        e.stopPropagation();
+        dispatch({ type: 'toggleOptions' });
+    }
+    function toggleOptions(e: React.MouseEvent<HTMLElement>) {
+        e.stopPropagation();
+        dispatch({ type: 'toggleOptions' });
     }
 
     return (
         <SettingsWrapper>
             <SettingsToggle onClick={toggleOptions}>
                 <SettingsLabel>Settings</SettingsLabel>
-                <SettingsIcon isOpen={isOpen} />
+                <SettingsIcon />
             </SettingsToggle>
-            <OptionsWrapper isOpen={isOpen}>
-                <ButtonToggle
-                    data-test='switchThemeButton'
-                    onClick={props.switchTheme}
-                >
-                    SWITCH THEME
-                </ButtonToggle>
+            <OptionsModal
+                onClick={(e) => closeModal(e)}
+                isOpen={state.isOptionsOpen}
+            >
+                <OptionsWrapperModal isOpen={state.isOptionsOpen}>
+                    <OptionsComponent />
+                </OptionsWrapperModal>
+            </OptionsModal>
+            <OptionsWrapper isOpen={state.isOptionsOpen}>
+                <OptionsComponent />
             </OptionsWrapper>
         </SettingsWrapper>
     );

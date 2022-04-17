@@ -87,7 +87,9 @@ export const TimerComponent = () => {
         <TimerWrapper>
             <VolumeWrapper onClick={toggleAudio}>
                 {state.options.volume ? <VolumeIcon /> : <VolumeMuteIcon />}
-                <VolumeText>{state.options.volume * 100}%</VolumeText>
+                <VolumeText>
+                    {Math.floor(state.options.volume * 100)}%
+                </VolumeText>
             </VolumeWrapper>
             <PomodoroCount>
                 <PomodoroImage />

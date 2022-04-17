@@ -1,11 +1,12 @@
 import { ActionTypes, StateTypes } from '../types/TimerReducerTypes';
 import { createContext } from 'react';
 
-const pomodoroLength = 3;
-const shortBreakLength = 1;
-const longBreakLength = 2;
+const pomodoroLength = 1;
+const shortBreakLength = 5 * 60;
+const longBreakLength = 10 * 60;
 
 export const initialState = {
+    theme: 'light',
     time: pomodoroLength,
     isRunning: false,
     isStarted: false,
@@ -19,6 +20,7 @@ export const initialState = {
     options: {
         volume: 0,
     },
+    isOptionsOpen: false,
 };
 
 export const AppContext = createContext<{

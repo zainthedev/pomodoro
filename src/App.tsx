@@ -12,17 +12,6 @@ import { SettingsComponent } from './components/SettingsComponent';
 
 function App() {
     const [state, dispatch] = useReducer(timerReducer, initialState);
-    const [theme, setTheme] = useState('light');
-
-    function switchTheme() {
-        const newTheme = theme === 'light' ? 'dark' : 'light';
-        localStorage.setItem('theme', newTheme);
-        setTheme(newTheme);
-    }
-
-    function setShortBreakLength() {
-        dispatch({ type: 'setShortBreakLength', payload: 10 });
-    }
 
     // Set the current theme based on localStorage or the system theme
     useEffect(() => {
@@ -35,20 +24,28 @@ function App() {
             window.matchMedia('(prefers-color-scheme: dark)').matches;
 
         if (savedTheme) {
-            setTheme(savedTheme);
+            dispatch({
+                type: 'setTheme',
+                payload: savedTheme,
+            });
         } else if (preferDark) {
-            setTheme('dark');
+            dispatch({
+                type: 'setTheme',
+                payload: 'dark',
+            });
         }
     }, []);
 
     return (
         <AppContext.Provider value={{ state, dispatch }}>
-            <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+            <ThemeProvider
+                theme={state.theme === 'light' ? lightTheme : darkTheme}
+            >
                 <AppWrapper>
                     <Header>Pomodoro</Header>
                     <TimerComponent />
                     <ProgressComponent />
-                    <SettingsComponent switchTheme={switchTheme} />
+                    <SettingsComponent />
                     <GlobalStyle />
                 </AppWrapper>
             </ThemeProvider>

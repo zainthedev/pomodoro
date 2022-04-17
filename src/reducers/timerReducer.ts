@@ -6,6 +6,14 @@ export const timerReducer = (
     action: ActionTypes
 ): StateTypes => {
     switch (action.type) {
+        case 'setTheme':
+            if (action.payload) {
+                return { ...state, theme: action.payload };
+            } else {
+                const newTheme = state.theme === 'light' ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                return { ...state, theme: newTheme };
+            }
         case 'setTime':
             return { ...state, time: action.payload };
         case 'start':
@@ -75,6 +83,8 @@ export const timerReducer = (
             };
         case 'setOptions':
             return { ...state, options: action.payload };
+        case 'toggleOptions':
+            return { ...state, isOptionsOpen: !state.isOptionsOpen };
         default:
             throw new Error();
     }

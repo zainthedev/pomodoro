@@ -8,6 +8,7 @@ declare module 'styled-components' {
             startButton: string;
             stopButton: string;
             accent: string;
+            accent2: string;
             container: string;
             shadow: string;
         };
