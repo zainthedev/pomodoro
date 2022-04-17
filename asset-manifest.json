@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/pomodoro/static/css/main.a24745a7.css",
+    "main.js": "/pomodoro/static/js/main.3ae894a7.js",
+    "static/js/787.b1af5461.chunk.js": "/pomodoro/static/js/787.b1af5461.chunk.js",
+    "static/media/bell_2.mp3": "/pomodoro/static/media/bell_2.c5718d21e5ca8fb549f6.mp3",
+    "static/media/bell_1.mp3": "/pomodoro/static/media/bell_1.213b32ec198a166e0b34.mp3",
+    "static/media/relax_white.svg": "/pomodoro/static/media/relax_white.f5d5e20d80fb59c9b329d73c24929f6a.svg",
+    "static/media/relax.svg": "/pomodoro/static/media/relax.9d7d20c19f93cb46f2b00c2f641344ab.svg",
+    "static/media/tomato.svg": "/pomodoro/static/media/tomato.8b1505664739ec13459f3e42b54c792f.svg",
+    "static/media/settings.svg": "/pomodoro/static/media/settings.1249b87250dce83ad940b953c252841b.svg",
+    "static/media/moon.svg": "/pomodoro/static/media/moon.4a20380bde7121b5c5222f23edc4042b.svg",
+    "static/media/sleep_white.svg": "/pomodoro/static/media/sleep_white.e65d0bddc860b5c28a990e84234dc1df.svg",
+    "static/media/sleep.svg": "/pomodoro/static/media/sleep.f71d1b73000dcfecc0cefc0aecb79d0d.svg",
+    "static/media/speaker_mute.svg": "/pomodoro/static/media/speaker_mute.1a54a577335ec7b3e3bed088374bbd4d.svg",
+    "static/media/sun.svg": "/pomodoro/static/media/sun.f8653db37885713856e4d7c2a9a5e8e2.svg",
+    "index.html": "/pomodoro/index.html",
+    "static/media/speaker.svg": "/pomodoro/static/media/speaker.bc19440dd7a86762142e7072eea84b12.svg",
+    "main.a24745a7.css.map": "/pomodoro/static/css/main.a24745a7.css.map",
+    "main.3ae894a7.js.map": "/pomodoro/static/js/main.3ae894a7.js.map",
+    "787.b1af5461.chunk.js.map": "/pomodoro/static/js/787.b1af5461.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a24745a7.css",
+    "static/js/main.3ae894a7.js"
+  ]
+}
