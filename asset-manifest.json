@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pomodoro/static/css/main.a24745a7.css",
-    "main.js": "/pomodoro/static/js/main.3ae894a7.js",
+    "main.js": "/pomodoro/static/js/main.534f8de5.js",
     "static/js/787.b1af5461.chunk.js": "/pomodoro/static/js/787.b1af5461.chunk.js",
     "static/media/bell_2.mp3": "/pomodoro/static/media/bell_2.c5718d21e5ca8fb549f6.mp3",
     "static/media/bell_1.mp3": "/pomodoro/static/media/bell_1.213b32ec198a166e0b34.mp3",
@@ -13,15 +13,15 @@
     "static/media/sleep_white.svg": "/pomodoro/static/media/sleep_white.e65d0bddc860b5c28a990e84234dc1df.svg",
     "static/media/sleep.svg": "/pomodoro/static/media/sleep.f71d1b73000dcfecc0cefc0aecb79d0d.svg",
     "static/media/speaker_mute.svg": "/pomodoro/static/media/speaker_mute.1a54a577335ec7b3e3bed088374bbd4d.svg",
-    "static/media/sun.svg": "/pomodoro/static/media/sun.f8653db37885713856e4d7c2a9a5e8e2.svg",
     "index.html": "/pomodoro/index.html",
+    "static/media/sun.svg": "/pomodoro/static/media/sun.f8653db37885713856e4d7c2a9a5e8e2.svg",
     "static/media/speaker.svg": "/pomodoro/static/media/speaker.bc19440dd7a86762142e7072eea84b12.svg",
     "main.a24745a7.css.map": "/pomodoro/static/css/main.a24745a7.css.map",
-    "main.3ae894a7.js.map": "/pomodoro/static/js/main.3ae894a7.js.map",
+    "main.534f8de5.js.map": "/pomodoro/static/js/main.534f8de5.js.map",
     "787.b1af5461.chunk.js.map": "/pomodoro/static/js/787.b1af5461.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a24745a7.css",
-    "static/js/main.3ae894a7.js"
+    "static/js/main.534f8de5.js"
   ]
 }
