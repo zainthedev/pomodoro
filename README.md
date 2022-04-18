@@ -17,13 +17,14 @@ A pomodoro timer app, built with React, TypeScript and styled-components. Tested
 
 ## Reflection
 
-For this project, I set out to build a mobile-first, visually minimalist Pomodoro app.The idea was to create something that's not overly flashy and wouldn't look out of place in an office setting.
+For this project, I set out to build a mobile-first, visually minimalist Pomodoro app. The idea was to create something that's not overly flashy and wouldn't look out of place in an office setting.
 
 This was my first time using Cypress. Unfortunately, I had to make the decision to cut testing short as I realized I wouldn't fit it into my planned release schedule. However, I did test the essentials, and found that Cypress was immensely simple and pleasant to use.
 
 The last time I used React, I hadn't made use of Context or the useReducer hook. Thankfully, my experience with Vuex allowed me to quickly pick up how to work with these features.
 
-If I have time, I'd still like to add optional ambient noise, such as rain, the ocean, or even simple white noise.
+If I have time, I'd like to add a "test" button to the volume slider.
+Additionally, I think the ability to play an ambient noise, such as rain, the ocean, or even simple white noise, would improve the UX and make the site more interesting.
 I'd also like to add aria tags and work on increasing accessibility.
 
 ## Available Scripts
